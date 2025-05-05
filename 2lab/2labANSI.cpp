@@ -37,16 +37,47 @@ int comparestrings(const char* str1, const char* str2) {
     else return 3;
 }
 
+bool containsOnlyABC(const char* str) {
+    while (*str != '\0') {
+        char currentChar = *str;
+        if(currentChar != 'a' && currentChar != 'b' && currentChar != 'c') {
+            return false;
+        }
+        str++;
+    }
+    return true; 
+}
+
+int countWords(const char* str) {
+    int count = 0;
+    bool inWord = false;
+
+    while (*str != '\0') {
+        if (*str != ' ') {
+            if (!inWord) {
+                count++;
+                inWord = true;
+            }
+        } else {
+            inWord = false;
+        }
+        str++;
+    };
+    return count;
+}
+
 int main(){
-    char str1[20] = "  privet gerri01";
+    char str1[20] = "  hello 'wor\"ld";
     char str2[20] = "  j asd";
 
+    cout << countWords(str1) << endl;
+    cout << containsOnlyABC(str1) << endl;
     cout << comparestrings(str1, str2) << endl;
     addslashes(str1);
     ltrim(str1);
     cout << endl;
     for(int i = 0; str1[i] != '\0'; i++){
-        cout << str1[i] << ' ';
+        cout << str1[i];
     }
     cout << endl;
 
